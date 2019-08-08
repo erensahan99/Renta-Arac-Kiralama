@@ -21,6 +21,7 @@ Flask-SQLAlchemy==2.4.0
 Flask-Uploads==0.2.1
 Flask-User==1.0.1.5
 Flask-WTF==0.14.2
+gunicorn==19.9.0
 httplib2==0.9.2
 hyperlink==17.3.1
 idna==2.6
@@ -62,7 +63,7 @@ systemd-python==234
 Twisted==17.9.0
 urllib3==1.22
 virtualenv==16.7.2
-Werkzeug==0.15.5
+  Werkzeug==0.15.5
 WTForms==2.2.1
 wtforms-recaptcha==0.3.2
 zope.interface==4.3.2
