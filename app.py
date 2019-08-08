@@ -372,7 +372,6 @@ def reset():
 @app.route('/format/')
 def format():
     c.execute("""DELETE FROM kiralama_listesi""")
-    c.execute("""DROP TABLE kiralama_listesi""")
     c.execute("""DELETE FROM user""")
     c.execute("""DELETE FROM araclar""")
     conn.commit()

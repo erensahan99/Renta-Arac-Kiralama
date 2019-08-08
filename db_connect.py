@@ -3,8 +3,8 @@ import mysql.connector
 
 def connection():
     conn = mysql.connector.connect(host="us-cdbr-iron-east-02.cleardb.net",
-                            user = "b70af944e93ac1",
-                            passwd= "e2aed107",
-                            db = "heroku_78cf1cf050b4c37")
+                            user = "be03d4522f4269",
+                            passwd= "28171904",
+                            db = "heroku_6b66bc0805cf409")
     c = conn.cursor()
     return c,conn
