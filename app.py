@@ -28,7 +28,7 @@ def reset():
     c.close()
     conn.close()
     gc.collect()
-    return redirect('homepage')
+    return redirect(url_for('homepage'))
 
 def dated_url_for(endpoint, **values):
     if endpoint == 'static':
