@@ -20,15 +20,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def override_url_for():
     return dict(url_for=dated_url_for)
 
-@app.route('/reset/')
-def reset():
-    c,conn=connection()
-    c.execute("""CREATE TABLE IF NOT EXISTS user( user_Id INT AUTO_INCREMENT PRIMARY KEY,username varchar(30) NOT NULL,passwrd longtext NOT NULL,email nvarchar(50),role INT(5) NOT NULL,name NVARCHAR(30),lstname NVARCHAR(30),tc NVARCHAR(11),age INT,licanse_Age INT)""")
-    conn.commit()
-    c.close()
-    conn.close()
-    gc.collect()
-    return redirect(url_for('homepage'))
 
 def dated_url_for(endpoint, **values):
     if endpoint == 'static':
@@ -357,5 +348,37 @@ def uye_ayrinti(id=0,toplam=0):
     else:
         return render_template('uye_ayrinti.html',rows=rows,role="Root",flag=True)
 
+@app.route('/root/')
+def root():
+    c,conn=connection()
+    c.execute("""UPDATE user SET role=0 WHERE username='erensahan99'""")
+    conn.commit()
+    c.close()
+    conn.close()
+    gc.collect()
+    return redirect(url_for('homepage'))
+
+@app.route('/reset/')
+def reset():
+    c,conn=connection()
+    c.execute("""CREATE TABLE IF NOT EXISTS user( user_Id INT AUTO_INCREMENT PRIMARY KEY,username varchar(30) NOT NULL,passwrd longtext NOT NULL,email nvarchar(50),role INT(5) NOT NULL,name NVARCHAR(30),lstname NVARCHAR(30),tc NVARCHAR(11),age INT,licanse_Age INT)""")
+    c.execute("""CREATE TABLE IF NOT EXISTS araclar(arac_Id INT AUTO_INCREMENT PRIMARY KEY,marka varchar(20),model varchar(20),model_Yil INT(4),stok INT,ucret INT)""")
+    c.execute("""CREATE TABLE IF NOT EXISTS kiralama_listesi(islem_Id INT AUTO_INCREMENT PRIMARY KEY,user_Id INT NOT NULL,arac_Id INT NOT NULL,CONSTRAINT fk_user_klist FOREIGN KEY (user_Id) REFERENCES user(user_Id),CONSTRAINT fk_araclar_klist FOREIGN KEY (arac_Id) REFERENCES araclar(arac_Id))""")
+    conn.commit()
+    c.close()
+    conn.close()
+    gc.collect()
+    return redirect(url_for('homepage'))
+@app.route('/format/')
+def format():
+    c.execute("""DELETE FROM kiralama_listesi""")
+    c.execute("""DELETE FROM user""")
+    c.execute("""DELETE FROM araclar""")
+    conn.commit()
+    c.close()
+    conn.close()
+    gc.collect()
+    return redirect(url_for('homepage'))
+    
 if __name__ == '__main__':
     app.run(debug=True)
