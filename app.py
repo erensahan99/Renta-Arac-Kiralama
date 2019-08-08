@@ -20,6 +20,15 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def override_url_for():
     return dict(url_for=dated_url_for)
 
+@app.route('/reset/')
+def reset():
+    c,conn=connection()
+    c.execute("""CREATE TABLE IF NOT EXISTS user( user_Id INT AUTO_INCREMENT PRIMARY KEY,username varchar(30) NOT NULL,passwrd longtext NOT NULL,email nvarchar(50),role INT(5) NOT NULL,name NVARCHAR(30),lstname NVARCHAR(30),tc NVARCHAR(11),age INT,licanse_Age INT)""")
+    conn.commit()
+    c.close()
+    conn.close()
+    gc.collect()
+    return redirect('homepage')
 
 def dated_url_for(endpoint, **values):
     if endpoint == 'static':
