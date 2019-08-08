@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Renta Araç Kiralama</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+  <header style="min-height:200%">
+
+    <div id="carousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="6000">
+      <ol class="carousel-indicators">
+        <li data-target="#carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel" data-slide-to="1"></li>
+        <li data-target="#carousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="carousel-item active">
+          <a href="https://bootstrapcreative.com/">
+            <picture>
+              <img style="width:100%;height: 475px;background:url({{url_for('static',filename='images/araclar3.png')}}) no-repeat center center;background-size: cover;" class="d-block img-fluid">
+            </picture>
+            <div class="carousel-caption">
+              <!-- -->
+            </div>
+          </a>
+        </div>
+        <!-- /.carousel-item -->
+        <div class="carousel-item">
+          <a href="https://bootstrapcreative.com/">
+            <picture>
+              <img style="width:100%;height: 475px;background:url({{url_for('static',filename='images/araclar2.jpg')}}) no-repeat center top;background-size: cover;" class="d-block img-fluid">
+            </picture>
+
+            <div class="carousel-caption justify-content-center align-items-center">
+              <!-- -->
+            </div>
+          </a>
+        </div>
+        <!-- /.carousel-item -->
+        <div class="carousel-item">
+          <a href="https://bootstrapcreative.com/">
+            <picture>
+              <img style="width:100%;height: 475px;background:url({{url_for('static',filename='images/araclar1.jpg')}}) no-repeat center center;background-size: cover;" class="d-block img-fluid">
+            </picture>
+            <div class="carousel-caption justify-content-center align-items-center">
+              <div>
+                <!---->
+              </div>
+            </div>
+          </a>
+        </div>
+        <!-- /.carousel-item -->
+      </div>
+
+    </div>
+    <!-- /.carousel -->
+
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="col-md-3">
+        <a class="navbar-brand" href="{{url_for('homepage')}}">Anasayfa</a>
+      </div>
+      <div class="col-md-6">
+        <form class="form-inline" style="margin-right:0px;">
+          <input style="width:70%"class="form-control" type="search" placeholder="Arama Yap" aria-label="Search">
+          <button style="margin-left:10px;" class="btn btn-outline-info my-2 my-sm-0" type="submit">Ara</button>
+        </form>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-3">
+        <ul class="navbar-nav my-auto">
+
+          <li class="nav-item active">
+            <a class="nav-link" data-toggle="modal" data-target="#giris">Giriş Yap <span class="sr-only">(current)</span></a>
+            <!-- Giriş Yap Modal -->
+            <div class="modal fade" id="giris" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Giriş Yap</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form action="{{url_for('login')}}" , method="POST">
+                    <div class="modal-body">
+                      <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Emailinizi Giriniz">
+                      </div>
+                      <div class="form-group">
+                        <label>Parola</label>
+                        <input type="password" class="form-control" name="password" placeholder="Parolanızı Giriniz">
+                      </div>
+                      <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="benihatirla">
+                        <label class="form-check-label" for="exampleCheck1">Beni Hatırla</label>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary ">Giriş Yap</button>
+                      <button type="clear" class="btn btn-secondary " data-dismiss="modal">İptal</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  {% for message in messages %}
+  <div style="z-index: 9999;position:fixed;top:50px;width:90%; text-align: center;margin-top: 20px; margin-left:5%;margin-right:5%;" class="alert alert-danger alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+    {{message}}
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  <div class="content container" style="background-color:white;opacity:0.7;min-height:50vh;">
+    <div class="form" style="width:75%;margin-left:auto;margin-right:auto;">
+      {% from "_formhelpers.html" import render_field %}
+      <form action="{{url_for('register')}}" , method="POST">
+        <div class="modal-body">
+          <div class="form-row">
+            <!--<div class="col"><input type="text" class="form-control" placeholder="Email"></div>-->
+            <!--<div class="col"><input type="text" class="form-control" placeholder="Kullanıcı Adı"></div>-->
+            <div class="col">{{render_field(form.email)}}</div>
+            <div class="col">{{render_field(form.username)}}</div>
+          </div>
+          <br>
+          <div class="form-row">
+            <div class="col">
+              <!--<input type="text" class="form-control" placeholder="Parola">-->
+              <div class="col">{{render_field(form.password)}}</div>
+            </div>
+            <div class="col">
+              <!--<input type="text" class="form-control" placeholder="Parola Tekrar">-->
+              <div class="col">{{render_field(form.confirm)}}</div>
+            </div>
+          </div>
+          <br>
+          <div class="form-row">
+            <div class="col">
+              <!--<input type="text" class="form-control" placeholder="Ad">-->
+              <div class="col">{{render_field(form.name)}}</div>
+            </div>
+            <div class="col">
+              <!--<input type="text" class="form-control" placeholder="Soyad">-->
+              <div class="col">{{render_field(form.lstname)}}</div>
+            </div>
+          </div>
+          <br>
+          <div class="form-row">
+            <div class="col">{{render_field(form.tc)}}</div>
+            <div class="col">{{render_field(form.age)}}</div>
+          </div>
+        </div>
+        <br>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary mb-2">Kayıt Ol</button>
+          <a href="{{url_for('homepage')}}"><button type="clear" class="btn btn-secondary mb-2">İptal</button></a>
+        </div>
+      </form>
+    </div>
+
+
+  </div>
+  <footer>
+
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
